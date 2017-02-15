@@ -1,0 +1,29 @@
+---- KERNBASE Æ¥Åä (29 ÔÚ 6 ÎÄ¼þ ) ----
+Console.c (kern):	cp = (uint16_t*) (KERNBASE + CGA_BUF);
+Console.c (kern):		cp = (uint16_t*) (KERNBASE + MONO_BUF);
+entry.S (kern):# The kernel (this code) is linked at address ~(KERNBASE + 1 Meg), 
+entry.S (kern):#define	RELOC(x) ((x) - KERNBASE)
+entry.S (kern):	# KERNBASE+1MB.  Hence, we set up a trivial page directory that
+entry.S (kern):	# translates virtual addresses [KERNBASE, KERNBASE+4MB) to
+entry.S (kern):	# (why is this okay?).  Jump up above KERNBASE before entering
+Entrypgdir.c (kern):// starting at virtual address KERNBASE (that is, it maps virtual
+Entrypgdir.c (kern):// addresses [KERNBASE, KERNBASE+4MB) to physical addresses [0, 4MB)).
+Entrypgdir.c (kern):		= ((uintptr_t)entry_pgtable - KERNBASE) + PTE_P,
+Entrypgdir.c (kern):	// Map VA's [KERNBASE, KERNBASE+4MB) to PA's [0, 4MB)
+Entrypgdir.c (kern):	[KERNBASE>>PDXSHIFT]
+Entrypgdir.c (kern):		= ((uintptr_t)entry_pgtable - KERNBASE) + PTE_P + PTE_W
+Kernel.asm (obj\kern):	# (why is this okay?).  Jump up above KERNBASE before entering
+Kernel.asm (obj\kern):	cp = (uint16_t*) (KERNBASE + CGA_BUF);
+Kernel.asm (obj\kern):		cp = (uint16_t*) (KERNBASE + MONO_BUF);
+Kernel.asm (obj\kern):	cprintf("  entry  %08x (virt)  %08x (phys)\n", entry, entry - KERNBASE);
+Kernel.asm (obj\kern):	cprintf("  etext  %08x (virt)  %08x (phys)\n", etext, etext - KERNBASE);
+Kernel.asm (obj\kern):	cprintf("  edata  %08x (virt)  %08x (phys)\n", edata, edata - KERNBASE);
+Kernel.asm (obj\kern):	cprintf("  end    %08x (virt)  %08x (phys)\n", end, end - KERNBASE);
+Memlayout.h (inc): *    KERNBASE ----->  +------------------------------+ 0xf0000000
+Memlayout.h (inc):#define	KERNBASE	0xF0000000
+Memlayout.h (inc):// IOPHYSMEM can be addressed at KERNBASE + IOPHYSMEM.  The hole ends
+Memlayout.h (inc):#define VPT		(KERNBASE - PTSIZE)
+Monitor.c (kern):	cprintf("  entry  %08x (virt)  %08x (phys)\n", entry, entry - KERNBASE);
+Monitor.c (kern):	cprintf("  etext  %08x (virt)  %08x (phys)\n", etext, etext - KERNBASE);
+Monitor.c (kern):	cprintf("  edata  %08x (virt)  %08x (phys)\n", edata, edata - KERNBASE);
+Monitor.c (kern):	cprintf("  end    %08x (virt)  %08x (phys)\n", end, end - KERNBASE);
